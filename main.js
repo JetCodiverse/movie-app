@@ -1,30 +1,31 @@
 import { showMovies } from "./public/src/functions/showMovies";
-// import { showHomepage } from "./public/src/functions/getMovieId";
-//import { getMovieID } from "./public/src/functions/getMovieId";
-// import { fetchMovieLinks } from "./public/src/functions/getMovieId";
+import getMovies from "./public/src/functions/getMovies";
 
-const API_URL =
-  "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=3fd2be6f0c70a2a598f084ddfb75487c&page=1";
+const apiKey = "391b19b86371301316b362ccf31ffda4";
 
-const SEARCH_API =
-  'https://api.themoviedb.org/3/search/movie?api_key=3fd2be6f0c70a2a598f084ddfb75487c&query="';
+async function main() {
+  const API_URL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&page=1`;
 
-const main = document.getElementById("main");
-const form = document.getElementById("form");
-const search = document.getElementById("search");
+  const movieData = await getMovies(API_URL);
+  // const movieId = API_URL.results.id;
+  // const movieById = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`;
 
-// Get initial movies
-getMovies(API_URL);
+  const main = document.getElementById("main");
+  const form = document.getElementById("form");
+  const search = document.getElementById("search");
 
-async function getMovies(url) {
-  const res = await fetch(url);
-  const data = await res.json();
-
-  showMovies(data.results);
+  // Get initial movies
+  getMovies(API_URL);
+  console.log(getMovies(API_URL));
+  console.log(movieData);
 }
+
+main();
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+
+  const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query="`;
 
   const searchTerm = search.value;
 
