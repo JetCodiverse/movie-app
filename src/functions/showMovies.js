@@ -7,6 +7,7 @@ export function showMovies(movies) {
   movies.forEach(async (movie) => {
     const { title, poster_path, vote_average, overview, id, release_date } =
       movie;
+    console.log(id);
 
     const apiKey = "391b19b86371301316b362ccf31ffda4";
     const movieById = await fetch(
